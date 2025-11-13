@@ -203,7 +203,7 @@ nano .env.prod
 # Django Settings
 DJANGO_SETTINGS_MODULE=config.settings.prod
 DJANGO_SECRET_KEY=your-very-secure-random-secret-key-here-change-this
-DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com,YOUR_SERVER_IP
+DJANGO_ALLOWED_HOSTS=uncle-ebook.com,www.uncle-ebook.com,YOUR_SERVER_IP
 DJANGO_SECURE_SSL_REDIRECT=True
 
 # Database Settings
@@ -227,7 +227,7 @@ DEFAULT_FROM_EMAIL=Uncle EBook <your-email@gmail.com>
 
 # Security (Production)
 DJANGO_DEBUG=False
-DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com
+DJANGO_CSRF_TRUSTED_ORIGINS=https://uncle-ebook.com,https://www.uncle-ebook.com
 ```
 
 **บันทึกไฟล์:** `Ctrl + X` → `Y` → `Enter`
@@ -302,8 +302,8 @@ http://YOUR_SERVER_IP
 **ตรวจสอบ DNS:**
 ```bash
 # บนเครื่อง local
-nslookup your-domain.com
-dig your-domain.com
+nslookup uncle-ebook.com
+dig uncle-ebook.com
 ```
 
 ### 2. ติดตั้ง Certbot สำหรับ SSL
@@ -331,7 +331,7 @@ upstream django {
 
 server {
     listen 80;
-    server_name your-domain.com www.your-domain.com;
+    server_name uncle-ebook.com www.uncle-ebook.com;
     charset utf-8;
 
     # Max upload size
@@ -379,7 +379,7 @@ server {
 
 ```bash
 # ขอ SSL certificate
-sudo certbot certonly --standalone -d your-domain.com -d www.your-domain.com
+sudo certbot certonly --standalone -d uncle-ebook.com -d www.uncle-ebook.com
 
 # ป้อนอีเมลสำหรับ renewal notifications
 # ตอบ Y เพื่อยอมรับ Terms of Service
@@ -401,19 +401,19 @@ upstream django {
 # Redirect HTTP to HTTPS
 server {
     listen 80;
-    server_name your-domain.com www.your-domain.com;
+    server_name uncle-ebook.com www.uncle-ebook.com;
     return 301 https://$server_name$request_uri;
 }
 
 # HTTPS Server
 server {
     listen 443 ssl http2;
-    server_name your-domain.com www.your-domain.com;
+    server_name uncle-ebook.com www.uncle-ebook.com;
     charset utf-8;
 
     # SSL Configuration
-    ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/uncle-ebook.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/uncle-ebook.com/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
     ssl_prefer_server_ciphers on;
@@ -776,13 +776,42 @@ find ~/backups -mtime +30 -delete
 
 ---
 
+### 7. CSRF Verification Error
+
+```bash
+# ถ้าเจอ error: "CSRF verification failed. Request aborted."
+# แก้ไขโดยเพิ่มใน .env.prod:
+DJANGO_CSRF_TRUSTED_ORIGINS=http://uncle-ebook.com,http://www.uncle-ebook.com,https://uncle-ebook.com,https://www.uncle-ebook.com
+
+# Restart containers
+docker compose --profile prod restart web-prod
+```
+
+### 8. Logging Handler Error
+
+```bash
+# ถ้าเจอ error: "ValueError: Unable to configure handler 'file'"
+# สร้างโฟลเดอร์ logs
+mkdir -p logs
+chmod 755 logs
+
+# Rebuild และ restart
+docker compose --profile prod down
+docker compose --profile prod build
+docker compose --profile prod up -d
+```
+
+---
+
 ## 📝 Checklist ก่อน Deploy Production
 
 - [ ] เปลี่ยน `DJANGO_SECRET_KEY` เป็นค่าใหม่ที่ปลอดภัย
 - [ ] ตั้งค่า `DJANGO_DEBUG=False`
 - [ ] เปลี่ยน `POSTGRES_PASSWORD` เป็นรหัสผ่านที่แข็งแรง
-- [ ] ตั้งค่า `DJANGO_ALLOWED_HOSTS` ให้ถูกต้อง
+- [ ] ตั้งค่า `DJANGO_ALLOWED_HOSTS` ให้ถูกต้อง (รวม domain และ IP)
+- [ ] ตั้งค่า `DJANGO_CSRF_TRUSTED_ORIGINS` สำหรับ domain
 - [ ] ตั้งค่า Email settings สำหรับ production
+- [ ] สร้างโฟลเดอร์ `logs` ให้พร้อม
 - [ ] ตั้งค่า Firewall (UFW)
 - [ ] ติดตั้ง SSL certificate
 - [ ] ตั้งค่า auto-renewal สำหรับ SSL
@@ -792,6 +821,8 @@ find ~/backups -mtime +30 -delete
 - [ ] ตรวจสอบ security headers
 - [ ] เปิดใช้งาน HTTPS redirect
 - [ ] ทดสอบการทำงานของเว็บไซต์
+- [ ] ทดสอบ admin panel (/admin/)
+- [ ] ตรวจสอบ static และ media files
 
 ---
 
@@ -829,5 +860,48 @@ find ~/backups -mtime +30 -delete
 
 ---
 
+## 🚀 Quick Start Guide
+
+สำหรับผู้ที่ต้องการ deploy ด่วน:
+
+```bash
+# 1. Clone repository
+git clone https://github.com/Thitphavanh/Uncle-Engineer-E-Book.git
+cd Uncle-Engineer-E-Book
+
+# 2. สร้าง .env.prod (แก้ไขค่าต่างๆ ให้ถูกต้อง)
+nano .env.prod
+
+# 3. สร้างโฟลเดอร์ logs
+mkdir -p logs
+
+# 4. Build และ Start containers
+docker compose --profile prod build
+docker compose --profile prod up -d
+
+# 5. รัน migrations
+docker compose --profile prod exec web-prod python manage.py migrate
+
+# 6. สร้าง superuser
+docker compose --profile prod exec web-prod python manage.py createsuperuser
+
+# 7. Collect static files
+docker compose --profile prod exec web-prod python manage.py collectstatic --noinput
+
+# 8. ทดสอบ
+curl http://YOUR_SERVER_IP
+```
+
+---
+
+## 🔗 Links
+
+- **GitHub Repository**: https://github.com/Thitphavanh/Uncle-Engineer-E-Book
+- **Live Site**: https://uncle-ebook.com
+- **Admin Panel**: https://uncle-ebook.com/admin
+
+---
+
 **Last Updated:** 2025-11-13
-**Version:** 1.0.0
+**Version:** 2.0.0
+**Author:** Uncle Engineer Team
