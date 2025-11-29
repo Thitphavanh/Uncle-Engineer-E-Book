@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="min-h-screen bg-white">
+    <div class="container mx-auto px-4 py-12 max-w-9xl">
+        <h1 class="text-4xl font-light mb-12 tracking-tight text-black">ตะกร้าสินค้า</h1>
+
+        {% if cart|length > 0 %}
+            <div class="space-y-6">
+                <!-- Cart Items -->
+                {% for item in cart %}
+                    {% with product=item.product %}
+                    <div class="flex items-center gap-6 pb-6 border-b border-gray-200 hover:bg-gray-50 transition-colors px-4 py-4 rounded-lg">
+                        <!-- Product Image -->
+                        <div class="flex-shrink-0 w-20 h-20">
+                            {% if product.cover_image %}
+                                <img class="w-full h-full object-cover rounded-md" src="{{ product.cover_image.url }}" alt="{{ product.title }}">
+                            {% else %}
+                                <div class="w-full h-full bg-gray-100 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-book text-2xl text-gray-300"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-medium text-black truncate">{{ product.title }}</h3>
+                            <p class="text-sm text-gray-500 mt-1">฿{{ item.price|intcomma }}</p>
+                        </div>
+
+                        <!-- Quantity Control -->
+                        <div class="flex items-center gap-3">
+                            <form action="{% url 'cart_update' product.id %}" method="post" class="quantity-form" data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1"
+                                       class="quantity-input w-16 px-2 py-1 border border-gray-300 rounded-md text-center text-sm focus:outline-none focus:border-black transition-colors"
+                                       data-price="{{ item.price }}"
+                                       data-product-id="{{ product.id }}"
+                                       onchange="autoUpdateCart(this)">
+                            </form>
+                        </div>
+
+                        <!-- Item Total -->
+                        <div class="w-24 text-right">
+                            <p class="text-lg font-medium text-black item-total" data-product-id="{{ product.id }}">฿{{ item.total_price|intcomma }}</p>
+                        </div>
+
+                        <!-- Remove Button -->
+                        <div>
+                            <form action="{% url 'cart_remove' product.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="p-2 text-gray-400 hover:text-black transition-colors">
+                                    <i class="fas fa-times text-lg"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endwith %}
+                {% endfor %}
+
+                <!-- Cart Summary -->
+                <div class="mt-12 pt-8 border-t-2 border-black">
+                    <div class="flex justify-between items-center mb-8">
+                        <span class="text-2xl font-light text-black">ยอดรวมทั้งหมด</span>
+                        <span class="text-3xl font-medium text-black" id="cart-total">฿{{ cart.get_total_price|intcomma }}</span>
+                    </div>
+
+                    <div class="flex gap-4 justify-end">
+                        <a href="{% url 'ebooks' %}" class="px-6 py-3 border border-black text-black rounded-md hover:bg-gray-50 transition-colors font-medium">
+                            เลือกซื้อสินค้าต่อ
+                        </a>
+                        <a href="{% url 'checkout' %}" class="px-8 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors font-medium">
+                            ชำระเงิน
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center py-24">
+                <div class="inline-flex items-center justify-center w-24 h-24 border-2 border-gray-200 rounded-full mb-6">
+                    <i class="fas fa-shopping-cart text-3xl text-gray-300"></i>
+                </div>
+                <p class="text-xl text-gray-400 mb-8 font-light">ตะกร้าสินค้าว่างเปล่า</p>
+                <a href="{% url 'ebooks' %}" class="inline-block px-8 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors font-medium">
+                    เลือกซื้อสินค้า
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function autoUpdateCart(input) {
+    const quantity = parseInt(input.value) || 1;
+    const price = parseFloat(input.dataset.price);
+    const productId = input.dataset.productId;
+    const form = input.closest('.quantity-form');
+
+    // Update UI immediately
+    const itemTotal = price * quantity;
+    const itemTotalElement = document.querySelector(`.item-total[data-product-id="${productId}"]`);
+    if (itemTotalElement) {
+        itemTotalElement.textContent = '฿' + formatNumber(itemTotal.toFixed(2));
+    }
+    updateCartTotal();
+
+    // Send AJAX request to update server
+    const formData = new FormData(form);
+    const csrftoken = getCookie('csrftoken');
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to update cart');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function updateCartTotal() {
+    let total = 0;
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+
+    quantityInputs.forEach(input => {
+        const quantity = parseInt(input.value) || 1;
+        const price = parseFloat(input.dataset.price);
+        total += price * quantity;
+    });
+
+    const cartTotalElement = document.getElementById('cart-total');
+    if (cartTotalElement) {
+        cartTotalElement.textContent = '฿' + formatNumber(total.toFixed(2));
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartTotal();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,485 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block description %}Uncle EBook แพลตฟอร์มอีบุ๊คและหนังสือดิจิทัลชั้นนำของไทย มีหนังสือมากกว่า 10,000 เล่ม ครอบคลุมทุกหมวดหมู่ อ่านได้ทุกที่ทุกเวลา{% endblock %}
+
+{% block keywords %}อีบุ๊ค, หนังสืออิเล็กทรอนิกส์, หนังสือดิจิทัล, Uncle EBook, ebook Thailand, หนังสือออนไลน์, อ่านหนังสือออนไลน์, แพลตฟอร์มอีบุ๊คไทย, หนังสือแนะนำ, หนังสือมาใหม่{% endblock %}
+
+{% block og_title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block og_description %}เริ่มต้นการอ่านของคุณวันนี้ กับหนังสือนับพันเล่ม อ่านได้ทุกอุปกรณ์ ซิงค์ข้ามอุปกรณ์ อ่านไม่จำกัด{% endblock %}
+
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block twitter_description %}เริ่มต้นการอ่านของคุณวันนี้ กับหนังสือนับพันเล่ม อ่านได้ทุกอุปกรณ์{% endblock %}
+
+{% block content %}
+<!-- CTA Section -->
+<section class="py-24">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="bg-gradient-to-r from-gray-900 to-black rounded-[1rem] p-12 lg:p-20 text-center text-white relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
+            </div>
+            
+            <div class="relative z-10">
+                <h2 class="text-4xl lg:text-6xl font-bold mb-6">
+                    เริ่มต้นการอ่านของคุณวันนี้
+                </h2>
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                    ลงทะเบียนฟรีและเริ่มเพลิดเพลินกับหนังสือนับพันเล่มทันที
+                </p>
+                <button class="bg-white text-black px-12 py-5 rounded-full font-bold text-xl hover:bg-gray-100 transition-all hover:scale-105 shadow-2xl">
+                    <i class="fas fa-rocket mr-2"></i>
+                    เริ่มต้นฟรี
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured EBooks Section -->
+<section id="ebooks" class="py-20 bg-white">
+    <div class="container mx-auto px-4 lg:px-8">
+          <!-- Category Pills for Filtering -->
+          <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <button class="category-filter active px-6 py-3 rounded-full border-2 border-black bg-black text-white font-medium transition-all hover:scale-105" data-category="all">
+                <i class="fas fa-th mr-2"></i>ทั้งหมด
+            </button>
+            {% regroup ebooks by category as category_list %}
+            {% for category in category_list %}
+                {% if category.grouper %}
+                <button class="category-filter px-6 py-3 rounded-full border-2 border-gray-300 font-medium transition-all hover:border-black hover:scale-105" data-category="{{ category.grouper.name|lower }}">
+                    <i class="fas fa-bookmark mr-2"></i>{{ category.grouper.name }}
+                </button>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Section Header -->
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <h2 class="text-4xl lg:text-5xl font-bold mb-2">หนังสือแนะนำ</h2>
+                <p class="text-gray-600">คัดสรรหนังสือดีๆ มาให้คุณ</p>
+            </div>
+            <a href="{% url 'ebooks' %}" class="inline-flex items-center text-lg font-semibold hover:underline group">
+                ดูทั้งหมด
+                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+        
+        <!-- EBooks Display -->
+        {% if ebooks %}
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for ebook in ebooks %}
+            <div class="ebook-card bg-white rounded-2xl overflow-hidden cursor-pointer group transition-all hover:shadow-2xl"
+                 data-category="{{ ebook.category.name|lower|default:'general' }}"
+                 data-ebook-url="{% url 'ebook_detail' ebook.slug %}"
+                 data-login-url="{% url 'login' %}?next={% url 'ebook_detail' ebook.slug %}"
+                 data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
+                <!-- Book Cover -->
+                <div class="bg-gray-200 relative overflow-hidden ebook-clickable">
+                    {% if ebook.cover_image %}
+                    <img src="{{ ebook.cover_image.url }}"
+                         alt="{{ ebook.title }}"
+                         class="w-full h-94 object-cover group-hover:scale-110 transition-transform duration-500"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200\'><i class=\'fas fa-book text-6xl text-gray-400\'></i></div>';">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                        <i class="fas fa-book text-6xl text-gray-400"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Category Badge -->
+                    {% if ebook.category %}
+                    <div class="absolute top-3 left-3 bg-black text-white text-xs font-bold px-3 py-1 rounded-full">
+                        {{ ebook.category.name }}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Availability Badge -->
+                    {% if ebook.is_available %}
+                    <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        พร้อมอ่าน
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Hover Overlay -->
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'ebook_detail' ebook.slug %}" class="bg-white text-black px-6 py-3 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <i class="fas fa-eye mr-2"></i>ดูรายละเอียด
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={% url 'ebook_detail' ebook.slug %}" class="bg-white text-black px-6 py-3 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <i class="fas fa-lock mr-2"></i>เข้าสู่ระบบเพื่ออ่าน
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Book Info -->
+                <div class="p-4 ebook-clickable">
+                    <h3 class="font-bold text-base mb-2 line-clamp-2 group-hover:text-gray-600 transition min-h-[3rem]">
+                        {{ ebook.title }}
+                    </h3>
+                    
+                    {% if ebook.descriptions %}
+                    <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                        {{ ebook.descriptions|truncatewords:10 }}
+                    </p>
+                    {% endif %}
+                    
+                    <div class="flex items-center justify-between mt-auto">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-book-open text-gray-400 text-sm"></i>
+                            <span class="text-sm text-gray-600">{{ ebook.category.name|default:"หนังสือทั่วไป" }}</span>
+                        </div>
+                        <div class="font-bold text-indigo-600">฿{{ ebook.price|intcomma }}</div>
+                    </div>
+                    
+                    <form action="{% url 'cart_add' ebook.id %}" method="post" class="mt-3 relative z-20">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-black transition flex items-center justify-center">
+                            <i class="fas fa-cart-plus mr-2"></i>ใส่ตะกร้า
+                        </button>
+                    </form>
+                    
+                    <!-- Additional Images Indicator -->
+                    {% if ebook.covers_images.count > 0 %}
+                    <div class="mt-3 flex items-center text-xs text-gray-500">
+                        <i class="fas fa-images mr-1"></i>
+                        <span>+{{ ebook.covers_images.count }} รูปภาพ</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-20">
+            <i class="fas fa-book-open text-9xl text-gray-300 mb-6"></i>
+            <h3 class="text-2xl font-bold mb-2">ยังไม่มีหนังสือในขณะนี้</h3>
+            <p class="text-gray-600 mb-6">กำลังเพิ่มหนังสือใหม่ๆ เร็วๆ นี้</p>
+            <a href="#" class="inline-flex items-center bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition">
+                <i class="fas fa-bell mr-2"></i>
+                แจ้งเตือนเมื่อมีหนังสือใหม่
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-4">สำรวจตามหมวดหมู่</h2>
+            <p class="text-xl text-gray-600">ค้นหาหนังสือที่คุณชื่นชอบ</p>
+        </div>
+        
+        <!-- Category Grid Display -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {% regroup ebooks by category as category_list %}
+            {% for category in category_list %}
+                {% if category.grouper %}
+                <a href="{% url 'category_detail' category.grouper.slug %}" class="group category-card" data-category="{{ category.grouper.name|lower }}">
+                    <div class="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl flex flex-col items-center justify-center p-6 hover:shadow-2xl transition-all hover:-translate-y-2 border-2 border-transparent hover:border-black">
+                        <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-book text-3xl text-gray-400 group-hover:text-black transition"></i>
+                        </div>
+                        <h3 class="font-bold text-center mb-1">{{ category.grouper.name }}</h3>
+                        <p class="text-xs text-gray-600 text-center">{{ category.list|length }} เล่ม</p>
+                        {% if category.grouper.description %}
+                        <p class="text-xs text-gray-500 text-center line-clamp-2 mt-1">{{ category.grouper.description|truncatewords:5 }}</p>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+    
+<!-- Features Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-4">ทำไมต้อง Uncle EBook?</h2>
+            <p class="text-xl text-gray-600">ประสบการณ์การอ่านที่ดีที่สุด</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl hover:shadow-2xl transition-all hover:-translate-y-2 border border-gray-100">
+                <div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-infinity text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">อ่านไม่จำกัด</h3>
+                <p class="text-gray-600">เข้าถึงหนังสือหลากหมายแนวได้ไม่จำกัดจำนวน</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl hover:shadow-2xl transition-all hover:-translate-y-2 border border-gray-100">
+                <div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">อ่านได้ทุกอุปกรณ์</h3>
+                <p class="text-gray-600">รองรับมือถือ แท็บเล็ต และคอมพิวเตอร์</p>
+            </div>
+        
+            
+            <!-- Feature 3 -->
+            <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl hover:shadow-2xl transition-all hover:-translate-y-2 border border-gray-100">
+                <div class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-sync-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">ซิงค์ข้ามอุปกรณ์</h3>
+                <p class="text-gray-600">อ่านต่อได้ทุกที่ด้วยระบบซิงค์อัตโนมัติ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .ebook-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ebook-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .ebook-clickable {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // EBook Card Click Handler - Login Required
+    document.addEventListener('DOMContentLoaded', () => {
+        const ebookCards = document.querySelectorAll('.ebook-card');
+
+        ebookCards.forEach(card => {
+            const clickableElements = card.querySelectorAll('.ebook-clickable');
+            const ebookUrl = card.dataset.ebookUrl;
+            const loginUrl = card.dataset.loginUrl;
+            const isAuthenticated = card.dataset.isAuthenticated === 'true';
+
+            clickableElements.forEach(element => {
+                element.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on buttons inside overlay or form
+                    if (e.target.closest('a') || e.target.closest('form') || e.target.closest('button')) {
+                        return;
+                    }
+
+                    if (isAuthenticated) {
+                        window.location.href = ebookUrl;
+                    } else {
+                        window.location.href = loginUrl;
+                    }
+                });
+            });
+        });
+    });
+
+    // Category Filter
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const ebookCards = document.querySelectorAll('.ebook-card');
+    
+    // Filter functionality
+    categoryFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            // Remove active class from all filters
+            categoryFilters.forEach(f => {
+                f.classList.remove('active', 'bg-black', 'text-white');
+                f.classList.add('border-gray-300');
+            });
+            
+            // Add active class to clicked filter
+            filter.classList.add('active', 'bg-black', 'text-white');
+            filter.classList.remove('border-gray-300');
+            
+            const category = filter.dataset.category;
+            
+            // Filter ebooks
+            ebookCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Favorite Button
+    const favoriteBtns = document.querySelectorAll('.favorite-btn');
+    favoriteBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const icon = this.querySelector('i');
+            const ebookId = this.dataset.ebookId;
+            
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+            icon.classList.toggle('text-red-500');
+            
+            // Add animation
+            this.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Here you can add AJAX call to save favorite
+            console.log('Toggled favorite for ebook ID:', ebookId);
+            
+            // Optional: Show toast notification
+            showToast(icon.classList.contains('fas') ? 'เพิ่มในรายการโปรดแล้ว' : 'ลบออกจากรายการโปรดแล้ว');
+        });
+    });
+    
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Countdown Timer
+    function updateCountdown() {
+        const timerElement = document.querySelector('.countdown-timer');
+        if (!timerElement) return;
+        
+        const now = new Date();
+        const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+        const diff = target - now;
+        
+        if (diff > 0) {
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            timerElement.textContent = '00:00:00';
+        }
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    
+    // Toast Notification
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-8 right-8 bg-black text-white px-6 py-3 rounded-full shadow-2xl z-50 animate-fade-in';
+        toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${message}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+    
+    // Add fadeIn animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Image lazy loading
+    document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    });
+    
+    // Add scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.ebook-card, .category-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease-out';
+        observer.observe(card);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+
+{% block title %}สำหรับพันธมิตร - Uncle EBook{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold mb-6">สำหรับพันธมิตร</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            ร่วมเป็นพันธมิตรกับ Uncle EBook และขยายโอกาสทางธุรกิจของคุณสู่ผู้อ่านหลายหมื่นคนบนแพลตฟอร์มของเรา
+        </p>
+    </div>
+
+    <!-- Partnership Types -->
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ประเภทของพันธมิตร</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Publisher Partner -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 hover:border-black hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <i class="fas fa-book text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">สำนักพิมพ์</h3>
+                <p class="text-gray-600 text-center mb-6">
+                    นำหนังสือของคุณมาจำหน่ายบนแพลตฟอร์ม Uncle EBook และเข้าถึงผู้อ่านนับหมื่นคน
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">จัดจำหน่ายหนังสืออิเล็กทรอนิกส์</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">รายงานยอดขายแบบ Real-time</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">ส่วนแบ่งรายได้ที่เป็นธรรม</span>
+                    </li>
+                </ul>
+                <a href="#contact-form" class="block text-center bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                    สนใจเป็นพันธมิตร
+                </a>
+            </div>
+
+            <!-- Author Partner -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 hover:border-black hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <i class="fas fa-pen text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">นักเขียน / ผู้แต่ง</h3>
+                <p class="text-gray-600 text-center mb-6">
+                    เผยแพร่ผลงานของคุณเองและสร้างรายได้จากการเขียนหนังสืออิเล็กทรอนิกส์
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">เผยแพร่หนังสือด้วยตนเอง</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">รับส่วนแบ่งรายได้สูงสุด 70%</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">เครื่องมือสำหรับการตลาด</span>
+                    </li>
+                </ul>
+                <a href="#contact-form" class="block text-center bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                    สนใจเป็นพันธมิตร
+                </a>
+            </div>
+
+            <!-- Corporate Partner -->
+            <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 hover:border-black hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <i class="fas fa-building text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-center">องค์กร / บริษัท</h3>
+                <p class="text-gray-600 text-center mb-6">
+                    แพ็คเกจสำหรับองค์กรที่ต้องการเข้าถึงหนังสืออิเล็กทรอนิกส์สำหรับพนักงาน
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">แพ็คเกจองค์กรพิเศษ</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">ระบบจัดการบัญชีหลายผู้ใช้</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                        <span class="text-gray-600">รายงานการใช้งาน</span>
+                    </li>
+                </ul>
+                <a href="#contact-form" class="block text-center bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                    สนใจเป็นพันธมิตร
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="bg-black text-white rounded-3xl p-12 mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ประโยชน์ของการเป็นพันธมิตร</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">50,000+</div>
+                <div class="text-gray-300">ผู้ใช้งานทั่วประเทศ</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">70%</div>
+                <div class="text-gray-300">ส่วนแบ่งรายได้สูงสุด</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">24/7</div>
+                <div class="text-gray-300">ระบบขายอัตโนมัติ</div>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl font-bold mb-2">100+</div>
+                <div class="text-gray-300">พันธมิตรปัจจุบัน</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ขั้นตอนการเป็นพันธมิตร</h2>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gray-100 text-black rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    1
+                </div>
+                <h3 class="font-bold mb-2">สมัครเป็นพันธมิตร</h3>
+                <p class="text-gray-600 text-sm">กรอกแบบฟอร์มและส่งข้อมูลของคุณ</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gray-100 text-black rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    2
+                </div>
+                <h3 class="font-bold mb-2">ตรวจสอบคุณสมบัติ</h3>
+                <p class="text-gray-600 text-sm">ทีมงานจะพิจารณาใบสมัครของคุณ</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gray-100 text-black rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    3
+                </div>
+                <h3 class="font-bold mb-2">ลงนามสัญญา</h3>
+                <p class="text-gray-600 text-sm">ตกลงเงื่อนไขและลงนามสัญญา</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gray-100 text-black rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    4
+                </div>
+                <h3 class="font-bold mb-2">เริ่มต้นใช้งาน</h3>
+                <p class="text-gray-600 text-sm">อัพโหลดเนื้อหาและเริ่มขาย</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features for Partners -->
+    <div class="bg-gray-50 rounded-3xl p-12 mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ฟีเจอร์สำหรับพันธมิตร</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">รายงานยอดขายแบบ Real-time</h3>
+                    <p class="text-gray-600">ติดตามยอดขายและรายได้ของคุณได้ทุกเมื่อผ่าน Dashboard</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">การจ่ายเงินรายเดือน</h3>
+                    <p class="text-gray-600">รับเงินตรงเวลาทุกเดือนผ่านการโอนธนาคาร</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">เครื่องมือทางการตลาด</h3>
+                    <p class="text-gray-600">เข้าถึงเครื่องมือส่งเสริมการขายและโปรโมชั่น</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">ทีมสนับสนุนเฉพาะทาง</h3>
+                    <p class="text-gray-600">มีทีมงานคอยช่วยเหลือและให้คำปรึกษา</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">ความปลอดภัยของเนื้อหา</h3>
+                    <p class="text-gray-600">ระบบ DRM ป้องกันการคัดลอกเนื้อหาอย่างมีประสิทธิภาพ</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">ระบบจัดการที่ง่าย</h3>
+                    <p class="text-gray-600">อัพโหลดและจัดการเนื้อหาได้ง่ายผ่าน Partner Portal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Stories -->
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">เรื่องราวความสำเร็จ</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white border border-gray-200 rounded-2xl p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <div>
+                        <div class="font-bold">สำนักพิมพ์ ABC</div>
+                        <div class="text-sm text-gray-600">สำนักพิมพ์</div>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic mb-4">
+                    "การร่วมงานกับ Uncle EBook ช่วยให้เราเข้าถึงผู้อ่านได้กว้างขวางขึ้น ยอดขายเพิ่มขึ้น 150% ในปีแรก"
+                </p>
+                <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <div>
+                        <div class="font-bold">นักเขียน สมชาย</div>
+                        <div class="text-sm text-gray-600">นักเขียนอิสระ</div>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic mb-4">
+                    "ระบบใช้งานง่าย รับเงินตรงเวลา และได้ส่วนแบ่งที่เป็นธรรม ผมแนะนำให้นักเขียนทุกคนลองใช้"
+                </p>
+                <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                    <div>
+                        <div class="font-bold">บริษัท XYZ</div>
+                        <div class="text-sm text-gray-600">องค์กร</div>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic mb-4">
+                    "แพ็คเกจองค์กรตอบโจทย์มาก พนักงานสามารถเข้าถึงหนังสือเพื่อพัฒนาตนเองได้ง่าย"
+                </p>
+                <div class="flex items-center text-yellow-500">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div id="contact-form" class="bg-white border-2 border-gray-200 rounded-3xl p-8 lg:p-12 max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">สนใจเป็นพันธมิตร?</h2>
+        <form action="#" method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="partner_type" class="block text-sm font-medium mb-2">ประเภทพันธมิตร</label>
+                    <select id="partner_type" name="partner_type" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                        <option value="">เลือกประเภท</option>
+                        <option value="publisher">สำนักพิมพ์</option>
+                        <option value="author">นักเขียน / ผู้แต่ง</option>
+                        <option value="corporate">องค์กร / บริษัท</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="company_name" class="block text-sm font-medium mb-2">ชื่อบริษัท/องค์กร</label>
+                    <input type="text" id="company_name" name="company_name" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="contact_name" class="block text-sm font-medium mb-2">ชื่อผู้ติดต่อ</label>
+                    <input type="text" id="contact_name" name="contact_name" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+
+                <div>
+                    <label for="contact_email" class="block text-sm font-medium mb-2">อีเมล</label>
+                    <input type="email" id="contact_email" name="contact_email" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="contact_phone" class="block text-sm font-medium mb-2">เบอร์โทรศัพท์</label>
+                    <input type="tel" id="contact_phone" name="contact_phone" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+
+                <div>
+                    <label for="website" class="block text-sm font-medium mb-2">เว็บไซต์ (ถ้ามี)</label>
+                    <input type="url" id="website" name="website"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+            </div>
+
+            <div>
+                <label for="partner_message" class="block text-sm font-medium mb-2">รายละเอียดเพิ่มเติม</label>
+                <textarea id="partner_message" name="partner_message" rows="5"
+                          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+                          placeholder="บอกเราเพิ่มเติมเกี่ยวกับธุรกิจของคุณและความต้องการในการเป็นพันธมิตร"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-black text-white py-4 rounded-xl font-medium hover:bg-gray-800 transition">
+                <i class="fas fa-paper-plane mr-2"></i>ส่งข้อมูล
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

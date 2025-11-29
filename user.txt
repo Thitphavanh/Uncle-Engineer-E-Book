@@ -1,0 +1,8 @@
+128.199.171.81
+adduser uncleebook
+New password:uncleebook]6'
+rsync --archive --chown=uncleebook:uncleebook ~/.ssh /home/uncleebook
+ssh -i "/Users/hery/My-Project/Uncle-Engineer-E-Book/ebook_openssh" uncleebook@128.199.171.81
+
+ชื่อผู้ใช้: admin
+Password:UncleEBook]6'

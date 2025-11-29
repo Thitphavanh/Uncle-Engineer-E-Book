@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block title %}เงื่อนไขการใช้งาน - Uncle EBook{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold mb-6">เงื่อนไขการใช้งาน</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            กรุณาอ่านเงื่อนไขการใช้งานอย่างละเอียดก่อนใช้บริการของ Uncle EBook
+        </p>
+        <p class="text-sm text-gray-500 mt-4">อัปเดตล่าสุด: 13 พฤศจิกายน 2568</p>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-9xl mx-auto">
+        <!-- Introduction -->
+        <div class="bg-gray-50 rounded-3xl p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">ข้อตกลงการใช้บริการ</h2>
+            <p class="text-gray-700 leading-relaxed">
+                เงื่อนไขการใช้งานนี้เป็นข้อตกลงทางกฎหมายระหว่างคุณและบริษัท Uncle EBook จำกัด ("เรา", "ของเรา")
+                เมื่อคุณเข้าถึงหรือใช้บริการของเรา รวมถึงเว็บไซต์และแอปพลิเคชันมือถือ คุณยอมรับและตกลงที่จะปฏิบัติตาม
+                เงื่อนไขทั้งหมดที่ระบุไว้ในที่นี้
+            </p>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">1</span>
+                การยอมรับข้อตกลง
+            </h2>
+            <div class="ml-13 space-y-3 text-gray-700 leading-relaxed">
+                <p>
+                    โดยการเข้าถึงและใช้บริการของ Uncle EBook คุณยืนยันว่า:
+                </p>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li>คุณมีอายุอย่างน้อย 18 ปี หรือได้รับความยินยอมจากผู้ปกครอง</li>
+                    <li>คุณมีสิทธิ์และความสามารถในการเข้าทำสัญญาผูกพันตามกฎหมาย</li>
+                    <li>คุณจะปฏิบัติตามเงื่อนไขการใช้งานและนโยบายความเป็นส่วนตัว</li>
+                    <li>ข้อมูลที่คุณให้เราเป็นความจริงและถูกต้อง</li>
+                </ul>
+                <p class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl mt-4">
+                    <strong>หมายเหตุ:</strong> หากคุณไม่ยอมรับเงื่อนไขเหล่านี้ กรุณาหยุดใช้บริการของเราทันที
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">2</span>
+                บัญชีผู้ใช้
+            </h2>
+            <div class="ml-13 space-y-4 text-gray-700 leading-relaxed">
+                <div>
+                    <h3 class="font-bold mb-2">2.1 การสร้างบัญชี</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li>คุณต้องสร้างบัญชีเพื่อใช้บริการบางอย่าง</li>
+                        <li>คุณต้องให้ข้อมูลที่ถูกต้องและเป็นปัจจุบัน</li>
+                        <li>คุณรับผิดชอบในการรักษาความปลอดภัยของบัญชี</li>
+                        <li>ห้ามแบ่งปันบัญชีหรือข้อมูลเข้าสู่ระบบกับผู้อื่น</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-2">2.2 การยกเลิกบัญชี</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li>คุณสามารถยกเลิกบัญชีได้ตลอดเวลา</li>
+                        <li>เราอาจระงับหรือยกเลิกบัญชีหากมีการละเมิดเงื่อนไข</li>
+                        <li>เนื้อหาที่ซื้อจะไม่สามารถเข้าถึงได้หลังจากยกเลิกบัญชี</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">3</span>
+                การซื้อและการชำระเงิน
+            </h2>
+            <div class="ml-13 space-y-4 text-gray-700 leading-relaxed">
+                <div>
+                    <h3 class="font-bold mb-2">3.1 ราคาและการชำระเงิน</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li>ราคาแสดงเป็นเงินบาทและรวม VAT แล้ว</li>
+                        <li>เราสงวนสิทธิ์ในการเปลี่ยนแปลงราคาโดยไม่ต้องแจ้งล่วงหน้า</li>
+                        <li>การชำระเงินต้องทำผ่านช่องทางที่เรากำหนด</li>
+                        <li>คุณรับผิดชอบค่าธรรมเนียมการชำระเงินที่เกิดขึ้น</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-2">3.2 การคืนเงิน</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li>สามารถขอคืนเงินได้ภายใน 7 วันหลังการซื้อ</li>
+                        <li>หนังสือที่ดาวน์โหลดหรืออ่านไปแล้วไม่สามารถขอคืนเงินได้</li>
+                        <li>การคืนเงินจะดำเนินการภายใน 14 วันทำการ</li>
+                        <li>กรณีพิเศษพิจารณาเป็นรายกรณี</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">4</span>
+                สิทธิ์ในการใช้งานเนื้อหา
+            </h2>
+            <div class="ml-13 space-y-4 text-gray-700 leading-relaxed">
+                <div>
+                    <h3 class="font-bold mb-2">4.1 ใบอนุญาต</h3>
+                    <p>
+                        เมื่อคุณซื้อหนังสืออีบุ๊ค คุณได้รับใบอนุญาตที่จำกัด ไม่สามารถโอนได้ และไม่ใช่แบบพิเศษเฉพาะ
+                        เพื่อใช้งานส่วนตัวเท่านั้น
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-2">4.2 ข้อจำกัด</h3>
+                    <p>คุณตกลงว่าจะไม่:</p>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li>คัดลอก แจกจ่าย หรือแบ่งปันเนื้อหาให้ผู้อื่น</li>
+                        <li>ลบหรือเปลี่ยนแปลงประกาศลิขสิทธิ์</li>
+                        <li>ใช้เนื้อหาเพื่อการค้าหรือธุรกิจ</li>
+                        <li>พยายามเข้าถึงหรือทำลายระบบรักษาความปลอดภัย</li>
+                        <li>ใช้เนื้อหาในลักษณะที่ผิดกฎหมาย</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">5</span>
+                ทรัพย์สินทางปัญญา
+            </h2>
+            <div class="ml-13 space-y-3 text-gray-700 leading-relaxed">
+                <p>
+                    เนื้อหาทั้งหมดบนแพลตฟอร์ม รวมถึงข้อความ รูปภาพ โลโก้ และซอฟต์แวร์ เป็นทรัพย์สินของ Uncle EBook
+                    หรือผู้ให้อนุญาต และได้รับความคุ้มครองโดยกฎหมายลิขสิทธิ์และกฎหมายทรัพย์สินทางปัญญาอื่นๆ
+                </p>
+                <p>
+                    การใช้เนื้อหาโดยไม่ได้รับอนุญาตถือเป็นการละเมิดลิขสิทธิ์และอาจมีความผิดทางอาญา
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">6</span>
+                การใช้งานที่ยอมรับได้
+            </h2>
+            <div class="ml-13 space-y-3 text-gray-700 leading-relaxed">
+                <p>คุณตกลงว่าจะไม่:</p>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li>ใช้บริการเพื่อวัตถุประสงค์ที่ผิดกฎหมาย</li>
+                    <li>ละเมิดสิทธิ์ของผู้อื่น</li>
+                    <li>อัพโหลดไวรัสหรือโค้ดที่เป็นอันตราย</li>
+                    <li>พยายามเข้าถึงระบบโดยไม่ได้รับอนุญาต</li>
+                    <li>รบกวนหรือขัดขวางการทำงานของบริการ</li>
+                    <li>แอบอ้างหรือแสดงตัวเป็นบุคคลอื่น</li>
+                    <li>เก็บรวบรวมข้อมูลของผู้ใช้รายอื่น</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">7</span>
+                การจำกัดความรับผิด
+            </h2>
+            <div class="ml-13 space-y-3 text-gray-700 leading-relaxed">
+                <p>
+                    บริการจัดให้ "ตามสภาพที่เป็น" และ "ตามที่มี" เราไม่รับประกันว่าบริการจะไม่มีข้อผิดพลาด
+                    ปลอดภัย หรือพร้อมใช้งานตลอดเวลา
+                </p>
+                <p>
+                    ภายใต้กรอบของกฎหมาย เราจะไม่รับผิดชอบต่อความเสียหายใดๆ ที่เกิดจากการใช้หรือไม่สามารถใช้บริการ
+                    รวมถึงความเสียหายทางตรง ทางอ้อม โดยบังเอิญ หรือเป็นผลสืบเนื่อง
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">8</span>
+                การชดใช้ค่าเสียหาย
+            </h2>
+            <div class="ml-13 text-gray-700 leading-relaxed">
+                <p>
+                    คุณตกลงที่จะชดใช้ค่าเสียหาย และปกป้อง Uncle EBook พนักงาน ผู้บริหาร และพันธมิตรจากการเรียกร้อง
+                    ความเสียหาย หรือค่าใช้จ่ายใดๆ ที่เกิดจากการละเมิดเงื่อนไขการใช้งานของคุณ
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">9</span>
+                การยกเลิกและระงับบริการ
+            </h2>
+            <div class="ml-13 space-y-3 text-gray-700 leading-relaxed">
+                <p>
+                    เราสงวนสิทธิ์ในการระงับหรือยกเลิกการเข้าถึงบริการของคุณโดยไม่ต้องแจ้งล่วงหน้า หากคุณละเมิด
+                    เงื่อนไขการใช้งาน หรือเรามีเหตุผลที่เชื่อว่ามีการกระทำที่ไม่เหมาะสม
+                </p>
+                <p>
+                    ในกรณีที่ยกเลิกบัญชี คุณจะสูญเสียสิทธิ์ในการเข้าถึงเนื้อหาที่ซื้อทั้งหมด และเราจะไม่คืนเงิน
+                    เว้นแต่กฎหมายจะกำหนดไว้เป็นอย่างอื่น
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">10</span>
+                การเปลี่ยนแปลงเงื่อนไข
+            </h2>
+            <div class="ml-13 text-gray-700 leading-relaxed">
+                <p>
+                    เราอาจแก้ไขเงื่อนไขการใช้งานนี้เป็นครั้งคราว การเปลี่ยนแปลงใดๆ จะมีผลทันทีที่เผยแพร่บนหน้านี้
+                    การใช้บริการต่อไปหลังจากมีการเปลี่ยนแปลงถือว่าคุณยอมรับเงื่อนไขใหม่
+                </p>
+                <p class="mt-3">
+                    เราแนะนำให้คุณตรวจสอบหน้านี้เป็นประจำเพื่อทราบการเปลี่ยนแปลงล่าสุด
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 11 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">11</span>
+                กฎหมายที่ใช้บังคับ
+            </h2>
+            <div class="ml-13 text-gray-700 leading-relaxed">
+                <p>
+                    เงื่อนไขการใช้งานนี้อยู่ภายใต้และตีความตามกฎหมายของประเทศไทย ข้อพิพาทใดๆ ที่เกิดขึ้น
+                    จะอยู่ภายใต้เขตอำนาจศาลแพ่งของกรุงเทพมหานคร
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 12 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">12</span>
+                การแยกส่วนบทบัญญัติ
+            </h2>
+            <div class="ml-13 text-gray-700 leading-relaxed">
+                <p>
+                    หากมีข้อกำหนดใดในเงื่อนไขนี้ถือว่าไม่สามารถบังคับใช้ได้หรือไม่ถูกต้องตามกฎหมาย
+                    ข้อกำหนดอื่นๆ จะยังคงมีผลบังคับใช้อย่างเต็มที่
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 13 -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <span class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-lg mr-3">13</span>
+                ติดต่อเรา
+            </h2>
+            <div class="ml-13 text-gray-700 leading-relaxed">
+                <p class="mb-4">
+                    หากคุณมีคำถามเกี่ยวกับเงื่อนไขการใช้งาน กรุณาติดต่อเราได้ที่:
+                </p>
+                <div class="bg-gray-50 rounded-2xl p-6 space-y-2">
+                    <p><strong>บริษัท Uncle EBook จำกัด</strong></p>
+                    <p>ที่อยู่: 123 ถนนสุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110</p>
+                    <p>อีเมล: <a href="mailto:legal@uncle-ebook.com" class="text-black font-bold hover:underline">legal@uncle-ebook.com</a></p>
+                    <p>โทรศัพท์: <a href="tel:+6621234567" class="text-black font-bold hover:underline">02-123-4567</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acceptance -->
+        <div class="bg-black text-white rounded-3xl p-8">
+            <h2 class="text-2xl font-bold mb-4 text-center">การยอมรับเงื่อนไข</h2>
+            <p class="text-center text-gray-300 mb-6">
+                โดยการใช้บริการของ Uncle EBook คุณยืนยันว่าคุณได้อ่าน เข้าใจ และยอมรับที่จะปฏิบัติตาม
+                เงื่อนไขการใช้งานทั้งหมดที่ระบุไว้ข้างต้น
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'privacy_policy' %}" class="inline-block bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition text-center">
+                    <i class="fas fa-shield-alt mr-2"></i>นโยบายความเป็นส่วนตัว
+                </a>
+                <a href="{% url 'contact' %}" class="inline-block bg-white bg-opacity-10 text-white border-2 border-white px-6 py-3 rounded-full font-medium hover:bg-opacity-20 transition text-center">
+                    <i class="fas fa-envelope mr-2"></i>ติดต่อเรา
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
