@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="min-h-screen bg-white">
+    <div class="container mx-auto px-4 py-12 max-w-9xl">
+        <h1 class="text-4xl font-light mb-12 tracking-tight text-black">ชำระเงิน</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Column: Payment Methods -->
+            <div class="border border-gray-200 rounded-lg p-8">
+                <h2 class="text-2xl font-light mb-8 text-black">เลือกช่องทางการชำระเงิน</h2>
+
+                <!-- Payment Method Tabs -->
+                <div class="mb-8">
+                    <div class="flex border-b border-gray-300">
+                        <button type="button" onclick="switchPaymentMethod('qr')"
+                                id="tab-qr"
+                                class="payment-tab flex-1 py-3 px-4 text-center font-medium border-b-2 border-black text-black transition-colors">
+                            <i class="fas fa-qrcode mr-2"></i>QR พร้อมเพย์
+                        </button>
+                        <button type="button" onclick="switchPaymentMethod('transfer')"
+                                id="tab-transfer"
+                                class="payment-tab flex-1 py-3 px-4 text-center font-medium border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-university mr-2"></i>โอนเงินธนาคาร
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QR Code Payment Method -->
+                <div id="payment-qr" class="payment-method">
+                    <div class="text-center">
+                        <h3 class="text-lg font-medium mb-6 text-black">สแกน QR Code เพื่อชำระเงิน</h3>
+
+                        <!-- QR Code -->
+                        <div class="bg-gray-50 rounded-lg p-8 mb-6 mx-auto max-w-sm border border-gray-200">
+                            <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                <p class="text-sm text-gray-600 mb-3">Scan QR Code ผ่าน app ธนาคาร</p>
+                                <div class="qr-code img-responsive mx-auto">
+                                    <img src="https://promptpay.io/0105561008411/{{ cart.get_total_price }}"
+                                         alt="QR Code พร้อมเพย์"
+                                         class="w-full h-auto max-w-xs mx-auto rounded-lg border border-gray-200"
+                                         onerror="this.style.display='none'; document.getElementById('qr-error').style.display='block';">
+                                    <div id="qr-error" style="display:none;" class="text-center py-8">
+                                        <i class="fas fa-qrcode text-6xl text-gray-300 mb-3"></i>
+                                        <p class="text-sm text-gray-400">QR Code พร้อมเพย์</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4 text-left">
+                            <p class="text-sm text-gray-700 mb-3 font-medium">
+                                <i class="fas fa-info-circle mr-2"></i>วิธีชำระเงิน
+                            </p>
+                            <ol class="text-sm text-gray-600 list-decimal list-inside space-y-1">
+                                <li>เปิดแอพธนาคารของคุณ</li>
+                                <li>เลือกสแกน QR Code พร้อมเพย์</li>
+                                <li>สแกน QR Code ด้านบน</li>
+                                <li>ตรวจสอบยอดเงิน: ฿{{ cart.get_total_price|intcomma }}</li>
+                                <li>ยืนยันการโอนเงิน</li>
+                                <li>แจ้งสลิปโอนเงินด้านขวา</li>
+                            </ol>
+                        </div>
+
+                        <!-- PromptPay Info -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-600 mb-2">
+                                <i class="fas fa-mobile-alt mr-2"></i>เลขพร้อมเพย์
+                            </p>
+                            <p class="text-lg font-mono font-semibold text-black">0-1055-61008-41-1</p>
+                            <p class="text-sm text-gray-500 mt-1">บริษัท คอนส์ โรโบติกส์ จำกัด</p>
+                        </div>
+
+                        <!-- Refund Policy -->
+                        <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                            <p class="text-sm text-gray-700 mb-2 font-medium">
+                                <i class="fas fa-ban mr-2"></i>นโยบายคืนเงิน
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                กรณีสมัครหรือโอนชำระแล้ว ทางเพจไม่มีนโยบายคืนเงินให้แก่ผู้สมัคร เนื่องจากก่อนสมัครผู้สมัครได้ทำการตัดสินใจเป็นที่เรียบร้อยและเสร็จสิ้นแล้ว
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                หมายเหตุ: ผู้สมัครสามารถเปลี่ยนไปเป็นคอร์สอื่นได้ที่ราคาเหมือนกันเท่านั้น
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bank Transfer Payment Method -->
+                <div id="payment-transfer" class="payment-method hidden">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-medium mb-6 text-black">โอนเงินเข้าบัญชีธนาคาร</h3>
+
+                        <!-- Bank Account -->
+                        <div class="bg-black rounded-lg p-6 text-white">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-university text-black text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">ธนาคารกรุงเทพ</p>
+                                    <p class="text-xs text-gray-300">BANGKOK BANK</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 border-t border-gray-700 pt-4">
+                                <div>
+                                    <p class="text-xs text-gray-300">สาขา</p>
+                                    <p class="text-base font-medium">สยามพารากอน</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-300">เลขที่บัญชี</p>
+                                    <p class="text-2xl font-mono font-bold tracking-wider">855-0-65158-5</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-300">ชื่อบัญชี</p>
+                                    <p class="text-base font-semibold">บริษัท คอนส์ โรโบติกส์ จำกัด</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-300">ประเภทบัญชี</p>
+                                    <p class="text-sm">ออมทรัพย์</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warning -->
+                        <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                            <p class="text-sm text-gray-700 mb-2 font-medium">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>ข้อควรระวัง
+                            </p>
+                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-1">
+                                <li>กรุณาโอนเงินให้ตรงกับยอดรวมสุทธิ: <span class="font-mono font-semibold">฿{{ cart.get_total_price|intcomma }}</span></li>
+                                <li>เก็บหลักฐานการโอนเงินไว้แจ้งด้านขวา</li>
+                                <li>ระบบจะตรวจสอบการชำระเงินภายใน 24 ชั่วโมง</li>
+                            </ul>
+                        </div>
+
+                        <!-- Refund Policy -->
+                        <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+                            <p class="text-sm text-gray-700 mb-2 font-medium">
+                                <i class="fas fa-ban mr-2"></i>นโยบายคืนเงิน
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                กรณีสมัครหรือโอนชำระแล้ว ทางเพจไม่มีนโยบายคืนเงินให้แก่ผู้สมัคร เนื่องจากก่อนสมัครผู้สมัครได้ทำการตัดสินใจเป็นที่เรียบร้อยและเสร็จสิ้นแล้ว
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                หมายเหตุ: ผู้สมัครสามารถเปลี่ยนไปเป็นคอร์สอื่นได้ที่ราคาเหมือนกันเท่านั้น
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary & Payment Form -->
+            <div class="space-y-6">
+                <!-- Order Summary -->
+                <div class="border border-gray-200 rounded-lg p-8">
+                    <h2 class="text-2xl font-light mb-6 text-black">สรุปรายการสั่งซื้อ</h2>
+                    <ul class="divide-y divide-gray-200 mb-6">
+                        {% for item in cart %}
+                            <li class="py-4 flex justify-between items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-black">{{ item.product.title }}</p>
+                                    <p class="text-sm text-gray-500 mt-1">จำนวน: {{ item.quantity }} x ฿{{ item.price|intcomma }}</p>
+                                </div>
+                                <p class="text-sm font-medium text-black ml-4">฿{{ item.total_price|intcomma }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="flex justify-between items-center border-t-2 border-black pt-4">
+                        <span class="text-xl font-light text-black">ยอดรวมสุทธิ</span>
+                        <span class="text-2xl font-medium text-black">฿{{ cart.get_total_price|intcomma }}</span>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="border border-gray-200 rounded-lg p-8">
+                    <h2 class="text-xl font-light mb-6 text-black">ข้อมูลการชำระเงิน</h2>
+
+                    <form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="payment_method" id="payment_method" value="qr">
+
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-black mb-3">
+                                แนบหลักฐานการโอนเงิน (สลิป) <span class="text-black">*</span>
+                            </label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg px-6 py-8 text-center cursor-pointer hover:border-black transition-colors" onclick="document.getElementById('slip-upload').click()">
+                                <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <p class="text-sm text-gray-600">
+                                    <span class="font-medium text-black">คลิกเพื่ออัปโหลด</span> หรือลากไฟล์มาวาง
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">PNG, JPG, PDF ขนาดไม่เกิน 10MB</p>
+                            </div>
+                            <input id="slip-upload" name="payment_slip" type="file" class="hidden" accept="image/*,.pdf" onchange="displayFileName(this)" required>
+                            <p id="file-name" class="mt-2 text-sm text-gray-600"></p>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="note" class="block text-sm font-medium text-black mb-3">
+                                หมายเหตุ <span class="text-black">*</span>
+                            </label>
+                            <textarea id="note" name="note" rows="3"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors text-sm"
+                                      placeholder="เช่น ชื่อบัญชีที่โอนเงิน หรือข้อมูลเพิ่มเติม..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                            ยืนยันการสั่งซื้อและแจ้งชำระเงิน
+                        </button>
+
+                        <div class="mt-4 text-center">
+                            <a href="{% url 'cart_detail' %}" class="text-sm text-gray-600 hover:text-black transition-colors">
+                                <i class="fas fa-arrow-left mr-1"></i>กลับไปแก้ไขตะกร้า
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Switch payment method tabs
+function switchPaymentMethod(method) {
+    // Update tabs
+    const tabs = document.querySelectorAll('.payment-tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('border-black', 'text-black');
+        tab.classList.add('border-transparent', 'text-gray-400');
+    });
+
+    const activeTab = document.getElementById('tab-' + method);
+    activeTab.classList.remove('border-transparent', 'text-gray-400');
+    activeTab.classList.add('border-black', 'text-black');
+
+    // Update content
+    const methods = document.querySelectorAll('.payment-method');
+    methods.forEach(m => m.classList.add('hidden'));
+
+    const activeMethod = document.getElementById('payment-' + method);
+    activeMethod.classList.remove('hidden');
+
+    // Update hidden input
+    document.getElementById('payment_method').value = method;
+}
+
+// Display selected file name
+function displayFileName(input) {
+    const fileNameElement = document.getElementById('file-name');
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const size = (file.size / 1024 / 1024).toFixed(2);
+        fileNameElement.innerHTML = `<i class="fas fa-file-image text-black mr-2"></i>ไฟล์ที่เลือก: <strong>${file.name}</strong> (${size} MB)`;
+    }
+}
+
+// Initialize default payment method
+document.addEventListener('DOMContentLoaded', function() {
+    switchPaymentMethod('qr');
+});
+</script>
+{% endblock %}

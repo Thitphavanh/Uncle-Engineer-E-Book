@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}ติดต่อเรา - Uncle EBook{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold mb-6">ติดต่อเรา</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            ทีมงาน Uncle EBook ยินดีให้บริการและตอบคำถามของคุณ ติดต่อเราผ่านช่องทางด้านล่าง
+        </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 mb-16">
+        <!-- Contact Form -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 lg:p-12">
+            <h2 class="text-3xl font-bold mb-8">ส่งข้อความถึงเรา</h2>
+            <form action="#" method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- Name -->
+                <div>
+                    <label for="name" class="block text-sm font-medium mb-2">ชื่อ-นามสกุล</label>
+                    <input type="text" id="name" name="name" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-2">อีเมล</label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium mb-2">เบอร์โทรศัพท์</label>
+                    <input type="tel" id="phone" name="phone"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                </div>
+
+                <!-- Subject -->
+                <div>
+                    <label for="subject" class="block text-sm font-medium mb-2">หัวข้อ</label>
+                    <select id="subject" name="subject" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black">
+                        <option value="">เลือกหัวข้อ</option>
+                        <option value="general">สอบถามทั่วไป</option>
+                        <option value="technical">ปัญหาทางเทคนิค</option>
+                        <option value="content">เสนอแนะเนื้อหา</option>
+                        <option value="partnership">ข้อเสนอความร่วมมือ</option>
+                        <option value="other">อื่นๆ</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div>
+                    <label for="message" class="block text-sm font-medium mb-2">ข้อความ</label>
+                    <textarea id="message" name="message" rows="5" required
+                              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                        class="w-full bg-black text-white py-4 rounded-xl font-medium hover:bg-gray-800 transition">
+                    <i class="fas fa-paper-plane mr-2"></i>ส่งข้อความ
+                </button>
+            </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div>
+            <!-- Contact Details -->
+            <div class="bg-gray-50 rounded-3xl p-8 lg:p-12 mb-8">
+                <h2 class="text-3xl font-bold mb-8">ข้อมูลติดต่อ</h2>
+
+                <div class="space-y-6">
+                    <!-- Address -->
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-1">ที่อยู่</h3>
+                            <p class="text-gray-600">
+                                123 ถนนสุขุมวิท แขวงคลองเตย<br>
+                                เขตคลองเตย กรุงเทพมหานคร 10110
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-1">โทรศัพท์</h3>
+                            <p class="text-gray-600">
+                                <a href="tel:+6621234567" class="hover:text-black transition">02-123-4567</a><br>
+                                <a href="tel:+66812345678" class="hover:text-black transition">081-234-5678</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-1">อีเมล</h3>
+                            <p class="text-gray-600">
+                                <a href="mailto:info@uncle-ebook.com" class="hover:text-black transition">info@uncle-ebook.com</a><br>
+                                <a href="mailto:support@uncle-ebook.com" class="hover:text-black transition">support@uncle-ebook.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-1">เวลาทำการ</h3>
+                            <p class="text-gray-600">
+                                จันทร์ - ศุกร์: 9:00 - 18:00 น.<br>
+                                เสาร์ - อาทิตย์: 10:00 - 17:00 น.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="bg-black text-white rounded-3xl p-8 lg:p-12">
+                <h2 class="text-2xl font-bold mb-6">ติดตามเราได้ที่</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
+                        <i class="fab fa-facebook text-2xl mr-3"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
+                        <i class="fab fa-twitter text-2xl mr-3"></i>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
+                        <i class="fab fa-instagram text-2xl mr-3"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
+                        <i class="fab fa-line text-2xl mr-3"></i>
+                        <span>LINE</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-gray-50 rounded-3xl p-8 lg:p-12">
+        <h2 class="text-3xl font-bold mb-8 text-center">คำถามที่พบบ่อย</h2>
+        <div class="max-w-9xl mx-auto space-y-6">
+            <div class="bg-white rounded-xl p-6">
+                <h3 class="font-bold mb-2">ฉันสามารถอ่านหนังสือบนอุปกรณ์ใดได้บ้าง?</h3>
+                <p class="text-gray-600">คุณสามารถอ่านหนังสืออีบุ๊คของเราได้บนสมาร์ทโฟน แท็บเล็ต คอมพิวเตอร์ และอุปกรณ์อื่นๆ ที่รองรับเว็บเบราว์เซอร์ สามารถดาวน์โหลดแอปพลิเคชันมือถือได้ทั้ง iOS และ Android</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-6">
+                <h3 class="font-bold mb-2">วิธีการชำระเงินมีอะไรบ้าง?</h3>
+                <p class="text-gray-600">เรารองรับการชำระเงินผ่านบัตรเครดิต/เดบิต โอนเงินผ่านธนาคาร พร้อมเพย์ และ TrueMoney Wallet</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-6">
+                <h3 class="font-bold mb-2">สามารถขอคืนเงินได้หรือไม่?</h3>
+                <p class="text-gray-600">หากพบปัญหาในการใช้งานหรือคุณภาพเนื้อหา สามารถขอคืนเงินได้ภายใน 7 วันหลังจากการซื้อ โปรดติดต่อทีมงานเพื่อดำเนินการ</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-6">
+                <h3 class="font-bold mb-2">ฉันสามารถแบ่งปันหนังสือให้คนอื่นได้หรือไม่?</h3>
+                <p class="text-gray-600">เพื่อปกป้องลิขสิทธิ์ของผู้เขียนและสำนักพิมพ์ หนังสืออีบุ๊คที่ซื้อจะผูกกับบัญชีของคุณเท่านั้น และไม่สามารถแบ่งปันหรือโอนให้ผู้อื่นได้</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

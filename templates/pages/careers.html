@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% block title %}ร่วมงานกับเรา - Uncle EBook{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold mb-6">ร่วมงานกับเรา</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            มาร่วมเป็นส่วนหนึ่งของทีมที่กำลังเปลี่ยนแปลงวงการหนังสือและการอ่านในยุคดิจิทัล
+        </p>
+    </div>
+
+    <!-- Why Join Us Section -->
+    <div class="bg-black text-white rounded-3xl p-12 mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ทำไมต้องร่วมงานกับ Uncle EBook</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-rocket text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">เติบโตไปด้วยกัน</h3>
+                <p class="text-gray-300">
+                    บริษัทที่กำลังเติบโตอย่างรวดเร็ว มีโอกาสในการพัฒนาและก้าวหน้าในสายอาชีพ
+                </p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-users text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">ทีมที่ยอดเยี่ยม</h3>
+                <p class="text-gray-300">
+                    ทำงานร่วมกับคนที่มีความสามารถและมีความหลงใหลในสิ่งที่พวกเขาทำ
+                </p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-balance-scale text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Work-Life Balance</h3>
+                <p class="text-gray-300">
+                    เราเชื่อในความสมดุลระหว่างชีวิตการทำงานและชีวิตส่วนตัว
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">สวัสดิการและผลประโยชน์</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-briefcase-medical text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">ประกันสุขภาพ</h3>
+                <p class="text-gray-600">ประกันสุขภาพและอุบัติเหตุสำหรับพนักงานและครอบครัว</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-umbrella-beach text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">วันหยุดพักผ่อน</h3>
+                <p class="text-gray-600">วันลาพักร้อนและวันหยุดตามประเพณีอย่างเต็มที่</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-graduation-cap text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">พัฒนาทักษะ</h3>
+                <p class="text-gray-600">งบประมาณสำหรับการเรียนรู้และพัฒนาตนเอง</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-home text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">ทำงานที่บ้าน</h3>
+                <p class="text-gray-600">ยืดหยุ่นในการทำงานแบบ Hybrid หรือ Remote</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-coffee text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">สิ่งอำนวยความสะดวก</h3>
+                <p class="text-gray-600">ของว่างและเครื่องดื่มฟรีในสำนักงาน</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <i class="fas fa-book text-3xl mb-4"></i>
+                <h3 class="font-bold mb-2">หนังสืออีบุ๊คฟรี</h3>
+                <p class="text-gray-600">เข้าถึงหนังสืออีบุ๊คทั้งหมดในแพลตฟอร์มได้ฟรี</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Positions Section -->
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ตำแหน่งงานที่เปิดรับ</h2>
+
+        <!-- Position 1 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-8 mb-6 hover:shadow-lg transition">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">Senior Full Stack Developer</h3>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <span><i class="fas fa-briefcase mr-2"></i>Full-time</span>
+                        <span><i class="fas fa-map-marker-alt mr-2"></i>Bangkok / Remote</span>
+                        <span><i class="fas fa-coins mr-2"></i>60,000 - 90,000 บาท</span>
+                    </div>
+                </div>
+                <a href="#" class="mt-4 lg:mt-0 bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition inline-block text-center">
+                    สมัครงาน
+                </a>
+            </div>
+            <p class="text-gray-600 mb-4">
+                เรากำลังมองหา Senior Full Stack Developer ที่มีประสบการณ์ในการพัฒนา Web Application ด้วย Django และ React
+                เพื่อมาร่วมพัฒนาแพลตฟอร์มอีบุ๊คของเรา
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Python</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Django</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">React</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Docker</span>
+            </div>
+        </div>
+
+        <!-- Position 2 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-8 mb-6 hover:shadow-lg transition">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">UX/UI Designer</h3>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <span><i class="fas fa-briefcase mr-2"></i>Full-time</span>
+                        <span><i class="fas fa-map-marker-alt mr-2"></i>Bangkok</span>
+                        <span><i class="fas fa-coins mr-2"></i>40,000 - 60,000 บาท</span>
+                    </div>
+                </div>
+                <a href="#" class="mt-4 lg:mt-0 bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition inline-block text-center">
+                    สมัครงาน
+                </a>
+            </div>
+            <p class="text-gray-600 mb-4">
+                มองหา UX/UI Designer ที่มีความคิดสร้างสรรค์และประสบการณ์ในการออกแบบ User Interface และ User Experience
+                สำหรับ Web และ Mobile Application
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Figma</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Adobe XD</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Sketch</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">User Research</span>
+            </div>
+        </div>
+
+        <!-- Position 3 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-8 mb-6 hover:shadow-lg transition">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">Content Curator</h3>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <span><i class="fas fa-briefcase mr-2"></i>Full-time</span>
+                        <span><i class="fas fa-map-marker-alt mr-2"></i>Bangkok / Hybrid</span>
+                        <span><i class="fas fa-coins mr-2"></i>30,000 - 45,000 บาท</span>
+                    </div>
+                </div>
+                <a href="#" class="mt-4 lg:mt-0 bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition inline-block text-center">
+                    สมัครงาน
+                </a>
+            </div>
+            <p class="text-gray-600 mb-4">
+                ต้องการ Content Curator ที่รักในการอ่านและมีความรู้เกี่ยวกับหนังสือหลากหลายประเภท
+                เพื่อคัดสรรและจัดการคอนเทนต์บนแพลตฟอร์ม
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Content Management</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Writing</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Research</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">SEO</span>
+            </div>
+        </div>
+
+        <!-- Position 4 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">Digital Marketing Specialist</h3>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <span><i class="fas fa-briefcase mr-2"></i>Full-time</span>
+                        <span><i class="fas fa-map-marker-alt mr-2"></i>Bangkok</span>
+                        <span><i class="fas fa-coins mr-2"></i>35,000 - 55,000 บาท</span>
+                    </div>
+                </div>
+                <a href="#" class="mt-4 lg:mt-0 bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition inline-block text-center">
+                    สมัครงาน
+                </a>
+            </div>
+            <p class="text-gray-600 mb-4">
+                หา Digital Marketing Specialist ที่มีประสบการณ์ในการวางแผนและดำเนินการ Campaign Marketing
+                ผ่านช่องทาง Digital ต่างๆ
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Facebook Ads</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Google Ads</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Social Media</span>
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Analytics</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Process -->
+    <div class="bg-gray-50 rounded-3xl p-12 mb-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">ขั้นตอนการสมัครงาน</h2>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    1
+                </div>
+                <h3 class="font-bold mb-2">ส่งใบสมัคร</h3>
+                <p class="text-gray-600 text-sm">กรอกข้อมูลและส่งเรซูเม่ของคุณ</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    2
+                </div>
+                <h3 class="font-bold mb-2">คัดกรอง</h3>
+                <p class="text-gray-600 text-sm">ทีม HR จะพิจารณาใบสมัครของคุณ</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    3
+                </div>
+                <h3 class="font-bold mb-2">สัมภาษณ์</h3>
+                <p class="text-gray-600 text-sm">พูดคุยกับทีมและทำแบบทดสอบ</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 mx-auto">
+                    4
+                </div>
+                <h3 class="font-bold mb-2">เริ่มงาน</h3>
+                <p class="text-gray-600 text-sm">ยินดีต้อนรับสู่ Uncle EBook!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center bg-black text-white rounded-3xl p-12">
+        <h2 class="text-3xl font-bold mb-4">ไม่เจอตำแหน่งที่เหมาะสม?</h2>
+        <p class="text-xl text-gray-300 mb-8">
+            ส่งประวัติของคุณมาให้เรา เราจะติดต่อกลับเมื่อมีตำแหน่งที่เหมาะสม
+        </p>
+        <a href="{% url 'contact' %}" class="inline-block bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-gray-100 transition">
+            <i class="fas fa-envelope mr-2"></i>ส่งประวัติมาที่เรา
+        </a>
+    </div>
+</div>
+{% endblock %}

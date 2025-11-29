@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
-{% block title %}Uncle Ebook - ร้านอีบุ๊ค ออนไลน์{% endblock %}
+{% block title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block description %}Uncle EBook แพลตฟอร์มอีบุ๊คและหนังสือดิจิทัลชั้นนำของไทย มีหนังสือมากกว่า 10,000 เล่ม ครอบคลุมทุกหมวดหมู่ อ่านได้ทุกที่ทุกเวลา{% endblock %}
+
+{% block keywords %}อีบุ๊ค, หนังสืออิเล็กทรอนิกส์, หนังสือดิจิทัล, Uncle EBook, ebook Thailand, หนังสือออนไลน์, อ่านหนังสือออนไลน์, แพลตฟอร์มอีบุ๊คไทย, หนังสือแนะนำ, หนังสือมาใหม่{% endblock %}
+
+{% block og_title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block og_description %}เริ่มต้นการอ่านของคุณวันนี้ กับหนังสือนับพันเล่ม อ่านได้ทุกอุปกรณ์ ซิงค์ข้ามอุปกรณ์ อ่านไม่จำกัด{% endblock %}
+
+{% block og_type %}website{% endblock %}
+
+{% block twitter_title %}Uncle Ebook - แพลตฟอร์มอีบุ๊คและสื่อดิจิทัลชั้นนำของไทย{% endblock %}
+
+{% block twitter_description %}เริ่มต้นการอ่านของคุณวันนี้ กับหนังสือนับพันเล่ม อ่านได้ทุกอุปกรณ์{% endblock %}
 
 {% block content %}
 <!-- CTA Section -->
@@ -125,8 +140,16 @@
                             <i class="fas fa-book-open text-gray-400 text-sm"></i>
                             <span class="text-sm text-gray-600">{{ ebook.category.name|default:"หนังสือทั่วไป" }}</span>
                         </div>
-                    
+                        <div class="font-bold text-indigo-600">฿{{ ebook.price|intcomma }}</div>
                     </div>
+                    
+                    <form action="{% url 'cart_add' ebook.id %}" method="post" class="mt-3 relative z-20">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-black transition flex items-center justify-center">
+                            <i class="fas fa-cart-plus mr-2"></i>ใส่ตะกร้า
+                        </button>
+                    </form>
                     
                     <!-- Additional Images Indicator -->
                     {% if ebook.covers_images.count > 0 %}
@@ -276,8 +299,8 @@
 
             clickableElements.forEach(element => {
                 element.addEventListener('click', (e) => {
-                    // Don't trigger if clicking on buttons inside overlay
-                    if (e.target.closest('a')) {
+                    // Don't trigger if clicking on buttons inside overlay or form
+                    if (e.target.closest('a') || e.target.closest('form') || e.target.closest('button')) {
                         return;
                     }
 

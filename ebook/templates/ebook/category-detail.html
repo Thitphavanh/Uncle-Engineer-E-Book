@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block title %}{{ category.name }} - Uncle Ebook{% endblock %}
 
@@ -88,6 +89,22 @@
                     {{ ebook.descriptions|truncatewords:10 }}
                 </p>
                 {% endif %}
+
+                <div class="flex items-center justify-between mt-auto mb-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-book-open text-gray-400 text-sm"></i>
+                        <span class="text-sm text-gray-600">{{ ebook.category.name|default:"หนังสือทั่วไป" }}</span>
+                    </div>
+                    <div class="font-bold text-indigo-600">฿{{ ebook.price|intcomma }}</div>
+                </div>
+
+                <form action="{% url 'cart_add' ebook.id %}" method="post" class="relative z-20">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-black transition flex items-center justify-center">
+                        <i class="fas fa-cart-plus mr-2"></i>ใส่ตะกร้า
+                    </button>
+                </form>
 
                 <!-- Additional Images Indicator -->
                 {% if ebook.covers_images.count > 0 %}
