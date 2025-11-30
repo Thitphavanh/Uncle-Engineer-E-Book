@@ -86,6 +86,8 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - static_volume:/app/staticfiles:ro
       - media_volume:/app/media:ro
+      - certbot_conf:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
     ports:
       - "80:80"
       - "443:443"
@@ -96,11 +98,24 @@ services:
     profiles:
       - prod
 
+  # Certbot for SSL certificates
+  certbot:
+    image: certbot/certbot
+    container_name: uncleebook-certbot
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    profiles:
+      - prod
+
 volumes:
   postgres_data_dev:
   postgres_data_prod:
   static_volume:
   media_volume:
+  certbot_conf:
+  certbot_www:
 
 networks:
   uncleebook-network:
