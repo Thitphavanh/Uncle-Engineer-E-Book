@@ -6,3 +6,13 @@ ssh -i "/Users/hery/My-Project/Uncle-Engineer-E-Book/ebook_openssh" uncleebook@1
 
 ชื่อผู้ใช้: admin
 Password:UncleEBook]6'
+
+
+# วิธีที่ 1: ใช้ Docker (ถ้าติดตั้ง Docker แล้ว)
+docker run --rm python:3.11-slim python -c "from secrets import token_urlsafe; print(token_urlsafe(50))"
+uncleebook@uncleebook:~/uncleebook/Uncle-Engineer-E-Book$ docker run --rm python:3.11-slim python -c "from secrets import token_urlsafe; print(token_urlsafe(50))"
+Unable to find image 'python:3.11-slim' locally
+3.11-slim: Pulling from library/python
+Digest: sha256:193fdd0bbcb3d2ae612bd6cc3548d2f7c78d65b549fcaa8af75624c47474444d
+Status: Downloaded newer image for python:3.11-slim
+w6V1P8cCcswvbtYR6-kW9QFViPTIlKN2nIG47PYwj-cWKfBJcWMGVlcvn7NTDCbNICs
