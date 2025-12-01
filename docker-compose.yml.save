@@ -1,0 +1,121 @@
+services:
+  # Development Django application
+  web-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: uncleebook-web-dev
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - ./media:/app/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.dev
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.dev
+    depends_on:
+      - db-dev
+    networks:
+      - uncleebook-network
+    profiles:
+      - dev
+
+  # Development Database
+  db-dev:
+    image: postgres:15-alpine
+    container_name: uncleebook-db-dev
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=uncleebook_dev
+      - POSTGRES_USER=uncleebook
+      - POSTGRES_PASSWORD=uncleebook123
+    ports:
+      - "5435:5432"
+    networks:
+      - uncleebook-network
+    profiles:
+      - dev
+
+  # Production Django application
+  web-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: uncleebook-web-prod
+    command: gunicorn --bind 0.0.0.0:8000 --workers 3 config.wsgi:application
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    expose:
+      - 8000
+    env_file:
+      - .env.prod
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.prod
+    depends_on:
+      - db-prod
+    networks:
+      - uncleebook-network
+    profiles:
+      - prod
+
+  # Production Database
+  db-prod:
+    image: postgres:15-alpine
+    container_name: uncleebook-db-prod
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    env_file:
+      - .env.prod
+    networks:
+      - uncleebook-network
+    profiles:
+      - prod
+
+  # Nginx for production
+  nginx:
+    image: nginx:alpine
+    container_name: uncleebook-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/ngiแnx/conf.d:ro
+      - static_volume:/app/staticfiles:ro
+      - media_volume:/app/media:ro
+      - certbot_conf:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web-prod
+    networks:
+      - uncleebook-network
+    profiles:
+      - prod
+
+  # Certbot for SSL certificates
+  certbot:
+    image: certbot/certbot
+    container_name: uncleebook-certbot
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    profiles:
+      - prod
+
+volumes:
+  postgres_data_dev:
+  postgres_data_prod:
+  static_volume:
+  media_volume:
+  certbot_conf:
+  certbot_www:
+
+networks:
+  uncleebook-network:
+    driver: bridge
