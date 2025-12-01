@@ -55,7 +55,7 @@ Thumbs.db
 
 # ebook.ppk
 *.ppkebook_openssh
-ebook.ppk
+*.ppk
 ebook_openssh
 
-user.txt
+*.txt
