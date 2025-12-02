@@ -31,16 +31,16 @@ uncleebook/
 
 ```bash
 # สร้าง Docker images
-docker-compose --profile dev build
+docker compose --profile dev build
 
 # รัน Development environment
-docker-compose --profile dev up -d
+docker compose --profile dev up -d
 
 # ดู logs
-docker-compose --profile dev logs -f web-dev
+docker compose --profile dev logs -f web-dev
 
 # หยุดการทำงาน
-docker-compose --profile dev down
+docker compose --profile dev down
 ```
 
 #### วิธีที่ 2: ใช้ Makefile (แนะนำ)
@@ -68,16 +68,16 @@ Development server จะรันที่: http://localhost:8000
 ```bash
 # แก้ไข .env.prod ให้เหมาะสม
 # สร้าง Docker images
-docker-compose --profile prod build
+docker compose --profile prod build
 
 # รัน Production environment
-docker-compose --profile prod up -d
+docker compose --profile prod up -d
 
 # ดู logs
-docker-compose --profile prod logs -f
+docker compose --profile prod logs -f
 
 # หยุดการทำงาน
-docker-compose --profile prod down
+docker compose --profile prod down
 ```
 
 #### วิธีที่ 2: ใช้ Makefile (แนะนำ)
@@ -107,7 +107,7 @@ Production server จะรันที่: http://localhost (ผ่าน Nginx
 # เข้า Django shell
 make shell-dev
 # หรือ
-docker-compose --profile dev exec web-dev python manage.py shell
+docker compose --profile dev exec web-dev python manage.py shell
 
 # เข้า Bash shell
 make bash-dev

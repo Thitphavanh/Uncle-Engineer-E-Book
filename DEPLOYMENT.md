@@ -940,3 +940,35 @@ docker compose --profile prod run --rm certbot renew --dry-run
 ## License
 
 Copyright © 2024 Uncle Engineer E-Book Project
+
+
+เจอแล้วครับ! มีไฟล์ nginx config 2 ไฟล์ที่ประกาศ upstream django ซ้ำกัน:
+  - uncleebook-http.conf
+  - uncleebook.conf
+
+  ให้ตรวจสอบว่าไฟล์ไหนใช้งาน:
+
+  บน server:
+
+  # ดูเนื้อหา uncleebook-http.conf
+  cat ~/uncleebook/Uncle-Engineer-E-Book/nginx/conf.d/uncleebook-http.conf
+
+  วิธีแก้: ลบไฟล์ uncleebook-http.conf ออก (เพราะเราใช้ uncleebook.conf ที่มีทั้ง HTTP
+  และ HTTPS แล้ว):
+
+  # ลบไฟล์ที่ไม่ใช้
+  rm ~/uncleebook/Uncle-Engineer-E-Book/nginx/conf.d/uncleebook-http.conf
+
+  # ตรวจสอบว่าเหลือแค่ไฟล์เดียว
+  ls ~/uncleebook/Uncle-Engineer-E-Book/nginx/conf.d/
+
+  # Restart nginx
+  docker compose restart nginx
+
+  # ดู logs
+  docker compose logs nginx --tail=20
+
+  # ทดสอบ
+  curl -I https://uncle-ebook.com
+
+  ลองรันตามลำดับแล้วบอกผลครับ

@@ -136,17 +136,18 @@
                         <a href="{% url 'ebooks' %}" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">อีบุ๊กทั้งหมด</a>
                     <a href="{% url 'categories' %}" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">หมวดหมู่</a>
                     
-                    <!-- Cart Icon -->
-                    <a href="{% url 'cart_detail' %}" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        {% if cart|length > 0 %}
-                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{ cart|length }}</span>
-                        {% endif %}
-                    </a>
+                    
 
                     {% if user.is_authenticated %}
+                        <!-- Cart Icon -->
+                        <a href="{% url 'cart_detail' %}" class="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            {% if cart|length > 0 %}
+                                <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{ cart|length }}</span>
+                            {% endif %}
+                        </a>
                             <span class="text-sm text-gray-600">
                                 <i class="fas fa-user mr-1"></i>{{ user.username }}
                             </span>
@@ -171,6 +172,12 @@
                     <a href="{% url 'categories' %}" class="block py-2 text-base font-medium hover:bg-gray-50 px-4 rounded">หมวดหมู่หนังสือ</a>
 
                     {% if user.is_authenticated %}
+                        <a href="{% url 'cart_detail' %}" class="block py-2 text-base font-medium hover:bg-gray-50 px-4 rounded">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                            {% if cart|length > 0 %}
+                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full ml-2">{{ cart|length }}</span>
+                            {% endif %}
+                        </a>
                         <div class="px-4 py-2 text-sm text-gray-600">
                             <i class="fas fa-user mr-1"></i>{{ user.username }}
                         </div>
