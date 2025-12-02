@@ -7,7 +7,7 @@ set -e
 domains=(uncle-ebook.com www.uncle-ebook.com)
 rsa_key_size=4096
 data_path="./certbot"
-email="your-email@example.com" # Change this to your email
+email="loong.wissawakorn@gmail.com" # Change this to your email
 staging=0 # Set to 1 for testing
 
 echo "### Preparing directories ..."
