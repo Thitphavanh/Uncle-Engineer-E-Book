@@ -6,7 +6,7 @@ urlpatterns = [
     path("ebooks/", views.ebooks, name="ebooks"),
     path("categories/", views.categories, name="categories"),
     path("category/<slug:slug>/", views.category_detail, name="category_detail"),
-    
+
     # Cart
     path('cart/', views.cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
@@ -17,6 +17,9 @@ urlpatterns = [
 
     # Authentication URLs
     path("login/", views.user_login, name="login"),
+
+    # Admin Management URLs
+    path("manage/ebook/upload/", views.ebook_upload, name="ebook_upload"),
 
     # Static Pages URLs
     path("about/", views.about, name="about"),

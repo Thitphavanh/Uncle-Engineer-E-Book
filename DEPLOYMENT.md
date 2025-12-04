@@ -855,8 +855,9 @@ docker compose --profile prod exec web-prod python manage.py shell
 
 ```bash
 # Production commands
-docker compose --profile prod up -d              # Start services
 docker compose --profile prod down               # Stop services
+docker compose --profile prod up -d              # Start services
+docker compose --profile prod up -d --build
 docker compose --profile prod ps                 # List services
 docker compose --profile prod logs -f            # View logs
 docker compose --profile prod build              # Build images
@@ -963,7 +964,10 @@ Copyright © 2024 Uncle Engineer E-Book Project
   ls ~/uncleebook/Uncle-Engineer-E-Book/nginx/conf.d/
 
   # Restart nginx
-  docker compose restart nginx
+   docker compose --profile prod down               # Stop services
+   docker compose --profile prod up -d              # Start services
+   docker compose --profile prod up -d --build
+   docker compose restart nginx
 
   # ดู logs
   docker compose logs nginx --tail=20

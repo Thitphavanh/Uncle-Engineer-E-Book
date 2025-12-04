@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}อัพโหลด EBook - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-8">
+    <div class="max-w-9xl mx-auto">
+
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">อัพโหลด EBook</h1>
+                    <p class="text-gray-600 mt-2">เพิ่ม EBook ใหม่เข้าสู่ระบบ (Admin Only)</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-lg">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="font-semibold">Admin Access</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+
+            <!-- Form Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-200">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-upload text-2xl text-black mr-3"></i>
+                    <h2 class="text-2xl font-bold">ฟอร์มอัพโหลด</h2>
+                </div>
+
+                <form method="post" enctype="multipart/form-data" class="space-y-6" id="ebookForm">
+                    {% csrf_token %}
+
+                    <!-- Category -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-folder mr-2"></i>{{ form.category.label }}
+                        </label>
+                        {{ form.category }}
+                        {% if form.category.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.category.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Title -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-book mr-2"></i>{{ form.title.label }}
+                        </label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-align-left mr-2"></i>{{ form.descriptions.label }}
+                        </label>
+                        {{ form.descriptions }}
+                        {% if form.descriptions.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.descriptions.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Price -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-tag mr-2"></i>{{ form.price.label }}
+                        </label>
+                        {{ form.price }}
+                        {% if form.price.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.price.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Cover Image -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-image mr-2"></i>{{ form.cover_image.label }}
+                        </label>
+                        <div class="mt-1">
+                            {{ form.cover_image }}
+                        </div>
+                        {% if form.cover_image.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.cover_image.errors.0 }}</p>
+                        {% endif %}
+                        <p class="mt-2 text-sm text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i>รูปปกหลักของหนังสือ
+                        </p>
+                    </div>
+
+                    <!-- Multiple Images -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-images mr-2"></i>{{ form.images.label }}
+                        </label>
+                        <div class="mt-1">
+                            {{ form.images }}
+                        </div>
+                        {% if form.images.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.images.errors.0 }}</p>
+                        {% endif %}
+                        <p class="mt-2 text-sm text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i>เลือกหลายรูปได้พร้อมกัน (กด Ctrl/Cmd + คลิก)
+                        </p>
+                        <div id="imagePreview" class="mt-3 grid grid-cols-3 gap-2"></div>
+                    </div>
+
+                    <!-- Is Available -->
+                    <div class="flex items-center">
+                        <div class="flex items-center h-5">
+                            {{ form.is_available }}
+                        </div>
+                        <label class="ml-3 text-sm font-semibold text-gray-700">
+                            <i class="fas fa-check-circle mr-2"></i>{{ form.is_available.label }}
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit" class="w-full bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition duration-200 flex items-center justify-center">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i>
+                            อัพโหลด EBook
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Recent EBooks Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-200">
+                <div class="flex items-center mb-6">
+                    <i class="fas fa-history text-2xl text-black mr-3"></i>
+                    <h2 class="text-2xl font-bold">EBook ล่าสุด</h2>
+                </div>
+
+                <div class="space-y-4 max-h-[600px] overflow-y-auto">
+                    {% if recent_ebooks %}
+                        {% for ebook in recent_ebooks %}
+                        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                            <img src="{{ ebook.cover_image.url }}" alt="{{ ebook.title }}" class="w-16 h-20 object-cover rounded shadow-sm">
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate">{{ ebook.title }}</h3>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    <i class="fas fa-folder text-xs mr-1"></i>
+                                    {% if ebook.category %}{{ ebook.category.name }}{% else %}ไม่มีหมวดหมู่{% endif %}
+                                </p>
+                                <div class="flex items-center justify-between mt-2">
+                                    <span class="text-sm font-semibold text-gray-900">
+                                        <i class="fas fa-tag text-xs mr-1"></i>{{ ebook.price }} บาท
+                                    </span>
+                                    <span class="text-xs px-2 py-1 rounded {% if ebook.is_available %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                        {% if ebook.is_available %}
+                                            <i class="fas fa-check mr-1"></i>เปิดให้บริการ
+                                        {% else %}
+                                            <i class="fas fa-times mr-1"></i>ปิดให้บริการ
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">
+                                    <i class="fas fa-images mr-1"></i>
+                                    {{ ebook.covers_images.count }} รูปภาพเพิ่มเติม
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-12 text-gray-500">
+                            <i class="fas fa-inbox text-4xl mb-3"></i>
+                            <p>ยังไม่มี EBook ในระบบ</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Help Section -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-blue-600 text-xl mr-3 mt-1"></i>
+                <div>
+                    <h3 class="font-semibold text-blue-900 mb-2">คำแนะนำการใช้งาน</h3>
+                    <ul class="text-sm text-blue-800 space-y-1">
+                        <li><i class="fas fa-check mr-2"></i>รูปปกหลัก (Cover Image) เป็นรูปที่จะแสดงบนหน้าหลัก</li>
+                        <li><i class="fas fa-check mr-2"></i>รูปภาพเพิ่มเติม (Multiple Images) สามารถเลือกได้หลายรูปพร้อมกัน</li>
+                        <li><i class="fas fa-check mr-2"></i>กด Ctrl (Windows) หรือ Cmd (Mac) ค้างไว้แล้วคลิกเลือกหลายรูป</li>
+                        <li><i class="fas fa-check mr-2"></i>รูปแรกของรูปภาพเพิ่มเติมจะถูกตั้งเป็นรูปหลัก (is_primary)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Preview Script -->
+<script>
+document.getElementById('id_images').addEventListener('change', function(e) {
+    const preview = document.getElementById('imagePreview');
+    preview.innerHTML = '';
+
+    const files = Array.from(e.target.files);
+
+    if (files.length > 0) {
+        files.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement('div');
+                div.className = 'relative';
+                div.innerHTML = `
+                    <img src="${e.target.result}" class="w-full h-24 object-cover rounded shadow-sm">
+                    <span class="absolute top-1 right-1 bg-black text-white text-xs px-2 py-1 rounded">${index + 1}</span>
+                    ${index === 0 ? '<span class="absolute bottom-1 left-1 bg-green-500 text-white text-xs px-2 py-1 rounded"><i class="fas fa-star"></i> Primary</span>' : ''}
+                `;
+                preview.appendChild(div);
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+});
+
+// Form validation
+document.getElementById('ebookForm').addEventListener('submit', function(e) {
+    const requiredFields = ['id_title', 'id_descriptions', 'id_price', 'id_cover_image'];
+    let isValid = true;
+
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field && !field.value) {
+            isValid = false;
+            field.classList.add('border-red-500');
+        } else if (field) {
+            field.classList.remove('border-red-500');
+        }
+    });
+
+    if (!isValid) {
+        e.preventDefault();
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    }
+});
+</script>
+
+{% endblock %}

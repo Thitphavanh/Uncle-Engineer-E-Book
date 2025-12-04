@@ -4,7 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import models
-from .models import EBook, EBookCategory
+from django.contrib.admin.views.decorators import staff_member_required
+from .models import EBook, EBookCategory, EBookImage
+from .forms import EBookForm
 
 
 def index(request):
@@ -239,3 +241,52 @@ def checkout(request):
         return redirect('index')
 
     return render(request, 'cart/checkout.html', {'cart': cart})
+
+
+# Admin Views - EBook Upload
+@staff_member_required(login_url='login')
+def ebook_upload(request):
+    """
+    View สำหรับอัพโหลด EBook (เข้าได้เฉพาะ admin/staff เท่านั้น)
+    รองรับการอัพโหลดหลายรูปภาพพร้อมกัน
+    """
+    if request.method == 'POST':
+        form = EBookForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # บันทึก EBook ก่อน
+            ebook = form.save()
+
+            # จัดการกับรูปภาพเพิ่มเติม (multiple images)
+            images = request.FILES.getlist('images')
+
+            if images:
+                for index, image in enumerate(images):
+                    # สร้าง EBookImage object สำหรับแต่ละรูป
+                    EBookImage.objects.create(
+                        ebook=ebook,
+                        image=image,
+                        alt_text=f"{ebook.title} - Image {index + 1}",
+                        is_primary=(index == 0)  # รูปแรกจะเป็นรูปหลัก
+                    )
+
+            messages.success(
+                request,
+                f'เพิ่ม EBook "{ebook.title}" สำเร็จ! '
+                f'อัพโหลดรูปภาพทั้งหมด {len(images)} รูป'
+            )
+            return redirect('ebook_upload')
+        else:
+            messages.error(request, 'เกิดข้อผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง')
+    else:
+        form = EBookForm()
+
+    # ดึง EBook ล่าสุด 10 รายการมาแสดง
+    recent_ebooks = EBook.objects.all().order_by('-id')[:10]
+
+    context = {
+        'form': form,
+        'recent_ebooks': recent_ebooks,
+    }
+
+    return render(request, 'admin/ebook_upload.html', context)
