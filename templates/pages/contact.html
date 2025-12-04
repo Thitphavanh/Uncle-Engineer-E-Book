@@ -76,6 +76,19 @@
                 <h2 class="text-3xl font-bold mb-8">ข้อมูลติดต่อ</h2>
 
                 <div class="space-y-6">
+                    <!-- Company -->
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-1">บริษัท</h3>
+                            <p class="text-gray-600">
+                                บริษัท คอนส์ โรโบติกส์ จำกัด
+                            </p>
+                        </div>
+                    </div>
+
                     <!-- Address -->
                     <div class="flex items-start">
                         <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
@@ -84,50 +97,38 @@
                         <div>
                             <h3 class="font-bold mb-1">ที่อยู่</h3>
                             <p class="text-gray-600">
-                                123 ถนนสุขุมวิท แขวงคลองเตย<br>
-                                เขตคลองเตย กรุงเทพมหานคร 10110
+                                226 พหลโยธิน แขวงสามเสนใน<br>
+                                เขตพญาไท กรุงเทพมหานคร 10400<br>
+                                ตึก Wisest Siri Building ห้อง 301<br>
+                                <span class="text-sm text-gray-500">(ใกล้ BTS สนามเป้า ทางออก 4)</span>
                             </p>
                         </div>
                     </div>
 
-                    <!-- Phone -->
+                    <!-- Facebook -->
                     <div class="flex items-start">
                         <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                            <i class="fas fa-phone"></i>
+                            <i class="fab fa-facebook"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold mb-1">โทรศัพท์</h3>
+                            <h3 class="font-bold mb-1">Facebook (ช่องทางหลัก)</h3>
                             <p class="text-gray-600">
-                                <a href="tel:+6621234567" class="hover:text-black transition">02-123-4567</a><br>
-                                <a href="tel:+66812345678" class="hover:text-black transition">081-234-5678</a>
+                                <a href="https://www.facebook.com/UncleEngineer" target="_blank" class="hover:text-black transition">
+                                    facebook.com/UncleEngineer
+                                </a>
                             </p>
                         </div>
                     </div>
 
-                    <!-- Email -->
+                    <!-- Note -->
                     <div class="flex items-start">
                         <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-info-circle"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold mb-1">อีเมล</h3>
-                            <p class="text-gray-600">
-                                <a href="mailto:info@uncle-ebook.com" class="hover:text-black transition">info@uncle-ebook.com</a><br>
-                                <a href="mailto:support@uncle-ebook.com" class="hover:text-black transition">support@uncle-ebook.com</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Working Hours -->
-                    <div class="flex items-start">
-                        <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold mb-1">เวลาทำการ</h3>
-                            <p class="text-gray-600">
-                                จันทร์ - ศุกร์: 9:00 - 18:00 น.<br>
-                                เสาร์ - อาทิตย์: 10:00 - 17:00 น.
+                            <h3 class="font-bold mb-1">หมายเหตุ</h3>
+                            <p class="text-gray-600 text-sm">
+                                ติดต่อทางเพจก่อนลุงจะให้เบอร์โทรคุยโดยตรงจร้าาา
                             </p>
                         </div>
                     </div>
@@ -137,22 +138,27 @@
             <!-- Social Media -->
             <div class="bg-black text-white rounded-3xl p-8 lg:p-12">
                 <h2 class="text-2xl font-bold mb-6">ติดตามเราได้ที่</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
-                        <i class="fab fa-facebook text-2xl mr-3"></i>
-                        <span>Facebook</span>
+                <div class="space-y-4">
+                    <a href="https://www.facebook.com/UncleEngineer" target="_blank" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-6 py-4 rounded-xl">
+                        <i class="fab fa-facebook text-3xl mr-4"></i>
+                        <div>
+                            <div class="font-bold">Facebook</div>
+                            <div class="text-sm text-gray-300">Uncle Engineer</div>
+                        </div>
                     </a>
-                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
-                        <i class="fab fa-twitter text-2xl mr-3"></i>
-                        <span>Twitter</span>
+                    <a href="https://line.me/ti/p/~uncle-engineer" target="_blank" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-6 py-4 rounded-xl">
+                        <i class="fab fa-line text-3xl mr-4"></i>
+                        <div>
+                            <div class="font-bold">LINE</div>
+                            <div class="text-sm text-gray-300">@uncle-engineer</div>
+                        </div>
                     </a>
-                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
-                        <i class="fab fa-instagram text-2xl mr-3"></i>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="#" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-4 py-3 rounded-xl">
-                        <i class="fab fa-line text-2xl mr-3"></i>
-                        <span>LINE</span>
+                    <a href="https://m.me/UncleEngineer" target="_blank" class="flex items-center bg-white bg-opacity-10 hover:bg-opacity-20 transition px-6 py-4 rounded-xl">
+                        <i class="fab fa-facebook-messenger text-3xl mr-4"></i>
+                        <div>
+                            <div class="font-bold">Messenger</div>
+                            <div class="text-sm text-gray-300">แชทกับเรา</div>
+                        </div>
                     </a>
                 </div>
             </div>
