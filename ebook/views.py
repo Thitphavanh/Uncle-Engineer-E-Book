@@ -10,7 +10,7 @@ from .forms import EBookForm
 
 
 def index(request):
-    ebooks = EBook.objects.filter(is_available=True).order_by("?")[:6]
+    ebooks = EBook.objects.filter(is_available=True).order_by("?").reverse()[:6]
 
     context = {
         "ebooks": ebooks,
