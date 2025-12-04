@@ -37,11 +37,12 @@ class EBookForm(forms.ModelForm):
 
     class Meta:
         model = EBook
-        fields = ['category', 'title', 'descriptions', 'price', 'is_available', 'cover_image']
+        fields = ['category', 'title', 'descriptions', 'slug', 'price', 'is_available', 'cover_image']
         labels = {
             'category': 'หมวดหมู่',
             'title': 'ชื่อหนังสือ',
             'descriptions': 'รายละเอียด',
+            'slug': 'Slug (URL Friendly)',
             'price': 'ราคา (บาท)',
             'is_available': 'เปิดให้บริการ',
             'cover_image': 'รูปปก (รูปหลัก)',
@@ -58,6 +59,10 @@ class EBookForm(forms.ModelForm):
                 'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring focus:ring-black focus:ring-opacity-50 px-4 py-2 border',
                 'rows': 5,
                 'placeholder': 'กรอกรายละเอียดหนังสือ'
+            }),
+            'slug': forms.TextInput(attrs={
+                'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring focus:ring-black focus:ring-opacity-50 px-4 py-2 border',
+                'placeholder': 'กรอก slug สำหรับ URL'
             }),
             'price': forms.NumberInput(attrs={
                 'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring focus:ring-black focus:ring-opacity-50 px-4 py-2 border',
